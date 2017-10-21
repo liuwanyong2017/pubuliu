@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>瀑布流</title>
+    <style>
+        .waterfall {
+            max-width: 600px;
+            border: 1px solid;
+        }
+        
+        img {
+            position: absolute;
+            width: 100px;
+            margin: 10px;
+            transition: all .4s;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <div class="waterfall">
+        <img src="http://via.placeholder.com/100x100" alt="300*100">
+        <img src="http://via.placeholder.com/100x70" alt="300*70">
+        <img src="http://via.placeholder.com/100x150" alt="300*150">
+        <img src="http://via.placeholder.com/100x250" alt="300*250">
+        <img src="http://via.placeholder.com/100x80" alt="300*80">
+        <img src="http://via.placeholder.com/100x90" alt="300*90">
+        <img src="http://via.placeholder.com/100x120" alt="300*120">
+        <img src="http://via.placeholder.com/100x210" alt="300*210">
+        <img src="http://via.placeholder.com/100x230" alt="300*230">
+        <img src="http://via.placeholder.com/100x100" alt="300*100">
+        <img src="http://via.placeholder.com/100x70" alt="300*70">
+        <img src="http://via.placeholder.com/100x150" alt="300*150">
+        <img src="http://via.placeholder.com/100x250" alt="300*250">
+        <img src="http://via.placeholder.com/100x80" alt="300*80">
+        <img src="http://via.placeholder.com/100x90" alt="300*90">
+        <img src="http://via.placeholder.com/100x120" alt="300*120">
+        <img src="http://via.placeholder.com/100x210" alt="300*210">
+        <img src="http://via.placeholder.com/100x230" alt="300*230">
+
+
+    </div>
+    <script>
+        var imgwid = $('.waterfall img').outerWidth(true)
+        var count = Math.floor($('.waterfall').width() / imgwid)
+        var heiarr = []
+        for (var i = 0; i < count; i++) {
+            heiarr[i] = 0
+        }
+        $('.waterfall img').on('load', function() {
+            var minval = heiarr[0]
+            var minindex = 0
+            for (var i = 0; i < count; i++) {
+
+                console.log(heiarr)
+                if (heiarr[i] < minval) {
+
+                    minval = heiarr[i]
+                    minindex = i
+
+                }
+            }
+            console.log(minval, minindex)
+            console.log(minindex * imgwid)
+            $(this).css({
+                left: minindex * imgwid,
+                top: minval
+            })
+            heiarr[minindex] += $(this).outerHeight(true)
+
+
+
+
+        })
+    </script>
+</body>
+
+</html>
